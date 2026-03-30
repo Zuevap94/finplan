@@ -25,7 +25,7 @@ const REPORT_TYPES: { type: ReportType; label: string; color: string }[] = [
 
 export default function ClientDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const { user: currentUser } = useAuth();
+  useAuth();
   const clientId = Number(id);
 
   const [client, setClient] = useState<User | null>(null);

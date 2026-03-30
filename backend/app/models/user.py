@@ -26,8 +26,25 @@ class User(Base):
 
     consultant_id = Column(Integer, ForeignKey("users.id"), nullable=True)
 
-    clients = relationship("User", backref="consultant", remote_side=[id], foreign_keys=[consultant_id])
-    financial_profiles = relationship("FinancialProfile", back_populates="user", cascade="all, delete-orphan")
-    reports = relationship("Report", back_populates="user", cascade="all, delete-orphan")
-    notifications = relationship("Notification", back_populates="user", cascade="all, delete-orphan")
-    audit_logs = relationship("AuditLog", back_populates="user", cascade="all, delete-orphan")
+    clients = relationship(
+        "User", backref="consultant", remote_side=[id],
+        foreign_keys=[consultant_id],
+    )
+    financial_profiles = relationship(
+        "FinancialProfile", back_populates="user",
+        cascade="all, delete-orphan",
+        primaryjoin="User.id == foreign(FinancialProfile.user_id)",
+    )
+    reports = relationship(
+        "Report", back_populates="user",
+        cascade="all, delete-orphan",
+        primaryjoin="User.id == foreign(Report.user_id)",
+    )
+    notifications = relationship(
+        "Notification", back_populates="user",
+        cascade="all, delete-orphan",
+    )
+    audit_logs = relationship(
+        "AuditLog", back_populates="user",
+        cascade="all, delete-orphan",
+    )

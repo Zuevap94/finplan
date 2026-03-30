@@ -45,7 +45,7 @@ def register(data: UserCreate, request: Request, db: Session = Depends(get_db)):
         ip_address=request.client.host if request.client else None,
     )
 
-    token = create_access_token({"sub": user.id, "role": user.role.value})
+    token = create_access_token({"sub": str(user.id), "role": user.role.value})
     return Token(access_token=token, token_type="bearer", user=UserResponse.model_validate(user))
 
 
@@ -62,7 +62,7 @@ def login(data: UserLogin, request: Request, db: Session = Depends(get_db)):
         ip_address=request.client.host if request.client else None,
     )
 
-    token = create_access_token({"sub": user.id, "role": user.role.value})
+    token = create_access_token({"sub": str(user.id), "role": user.role.value})
     return Token(access_token=token, token_type="bearer", user=UserResponse.model_validate(user))
 
 

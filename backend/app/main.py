@@ -5,6 +5,7 @@ import os
 
 from app.config import settings
 from app.database import engine, Base
+import app.models  # noqa: F401 - ensure all models are registered
 from app.api import auth, clients, financial, reports, notifications
 
 Base.metadata.create_all(bind=engine)

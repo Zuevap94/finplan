@@ -1,8 +1,8 @@
 """Seed script to populate database with demo data."""
 from datetime import date, datetime
 from app.database import SessionLocal, engine, Base
-from app.models.user import User, UserRole
-from app.models.financial import (
+from app.models import (
+    User, UserRole,
     FinancialProfile, Income, Expense, Asset, Liability, FinancialGoal,
     IncomeType, ExpenseCategory, AssetType, LiabilityType, GoalPriority,
 )

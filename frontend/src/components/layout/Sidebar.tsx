@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import {
-  LayoutDashboard, Users, FileText, Bell, Settings, LogOut,
+  LayoutDashboard, Users, FileText, Bell, LogOut,
   TrendingUp, PieChart, Target, Calculator
 } from 'lucide-react';
 
