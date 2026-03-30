@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    container_name: finplan-backend
+    environment:
+      - DATABASE_URL=sqlite:///./finplan.db
+      - SECRET_KEY=${SECRET_KEY:-change-me-in-production-use-openssl-rand-hex-32}
+      - DEBUG=false
+      - CORS_ORIGINS=["http://localhost", "http://localhost:3000"]
+    volumes:
+      - backend-data:/app
+      - reports-data:/app/reports
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: finplan-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  backend-data:
+  reports-data:
